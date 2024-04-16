@@ -1,16 +1,38 @@
 ---
+import Default from "../layouts/Default.astro";
 
+const subjects = [
+  {
+    name: "John Doe",
+    photo:
+      "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "Jane Doe",
+    photo:
+      "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
+    isCoder: false,
+    isKiller: true,
+  },
+];
+
+const rightAnswers = [];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Default>
+  <ul>
+    {
+      subjects.map((subject) => (
+        <li>
+          <p>{subject.name}</p>
+          <img src={subject.photo} />
+
+          <button>Coder</button>
+          <button>Killer</button>
+        </li>
+      ))
+    }
+  </ul>
+</Default>
