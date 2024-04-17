@@ -82,31 +82,40 @@ const subjects = [
     element.style.display = "block";
   };
 
-  const select = (e) => {
-    const parent = e.target.parentElement;
-    const answerElement = parent.querySelector(".answer-field");
-    const answer = answerElement.value;
-    const selection = e.target.innerText.toLowerCase();
-
-    if (currentSubject === undefined) return;
-
+  const checkIfCorrect = (answer: String, selection: String) => {
     const isCorrect = answer === selection;
     rightAnswers.push(isCorrect);
 
     if (isCorrect) displayCorrectMessage();
     else displayWrongMessage();
+  };
 
+  const rotateSubjects = (current: any, next: any) => {
     setTimeout(() => {
-      hideSubject(currentSubject);
+      hideSubject(current);
 
       hideMessages();
 
-      currentSubject = subjectsQueue.pop();
+      if (next === undefined) return;
 
-      if (currentSubject === undefined) return;
-
-      displaySubject(currentSubject);
+      displaySubject(next);
     }, 1000);
+
+    return next;
+  };
+
+  const select = (e: any) => {
+    const parent = e.target.parentElement;
+    const answerElement = parent.querySelector(".answer-field");
+    const answer = answerElement.value;
+    const selection = e.target.innerText.toLowerCase();
+    const nextSubject = subjectsQueue.pop();
+
+    if (currentSubject === undefined) return;
+
+    checkIfCorrect(answer, selection);
+
+    currentSubject = rotateSubjects(currentSubject, nextSubject);
   };
 
   buttons.forEach((btn) => {
@@ -120,7 +129,7 @@ const subjects = [
 
 <style>
   .answer-message {
-    display: block;
+    display: none;
     color: white;
   }
 </style>
