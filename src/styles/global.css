@@ -1,3 +1,11 @@
 h1, h2, h3, p {
     color: white;
 }
+
+.buttons-group button {
+    margin-right: 2rem;
+}
+
+.buttons-group button:last-child {
+    margin-right: 0;
+}

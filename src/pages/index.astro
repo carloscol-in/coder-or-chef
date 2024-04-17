@@ -1,6 +1,7 @@
 ---
 import SubjectList from "../components/SubjectList.astro";
 import Subject from "../components/Subject.astro";
+import Results from "../components/Results.astro";
 import Default from "../layouts/Default.astro";
 
 const subjects = [
@@ -26,20 +27,25 @@ const subjects = [
     {
       subjects.map((subject) => (
         <Subject subject={subject}>
-          <button>Coder</button>
-          <button>Killer</button>
+          <button class="p-1 px-3 border-2 border-green-300 rounded-md uppercase text-green-300">
+            coder
+          </button>
+          <button class="p-1 px-3 border-2 border-red-300 rounded-md uppercase text-red-300">
+            killer
+          </button>
         </Subject>
       ))
     }
   </SubjectList>
 
-  <p class="answer-message correct-message">Answer was Correct!</p>
-  <p class="answer-message wrong-message">Answer was Wrong!</p>
+  <Results>
+    <p id="trappedKillers" slot="trappedKillers"></p>
+  </Results>
 </Default>
 
 <script>
   const buttons = document.querySelectorAll("button");
-  const rightAnswers = [];
+  const answers: any[] = [];
   const subjectsQueue = Array.from(
     document.querySelectorAll("li.subject")
   ).reverse();
@@ -83,18 +89,18 @@ const subjects = [
   };
 
   const checkIfCorrect = (answer: String, selection: String) => {
-    const isCorrect = answer === selection;
-    rightAnswers.push(isCorrect);
+    const correct = answer === selection;
+    answers.push({ isKiller: answer === "killer", guess: correct });
 
-    if (isCorrect) displayCorrectMessage();
-    else displayWrongMessage();
+    // if (correct) displayCorrectMessage();
+    // else displayWrongMessage();
   };
 
   const rotateSubjects = (current: any, next: any) => {
     setTimeout(() => {
       hideSubject(current);
 
-      hideMessages();
+      //   hideMessages();
 
       if (next === undefined) return;
 
@@ -104,8 +110,32 @@ const subjects = [
     return next;
   };
 
+  const getResults = () => {
+    let counters = {
+      trappedKillers: 0,
+      trappedCoders: 0,
+      freeKillers: 0,
+      freeCoders: 0,
+    };
+
+    answers.forEach((answer) => {
+      if (answer.isKiller && answer.guess) counters.trappedKillers += 1;
+      if (answer.isKiller && !answer.guess) counters.freeKillers += 1;
+      if (!answer.isKiller && answer.guess) counters.trappedCoders += 1;
+      if (!answer.isKiller && !answer.guess) counters.freeCoders += 1;
+    });
+
+    return counters;
+  };
+
+  const displayResults = (results) => {
+    const trappedKillersParagraph = document.querySelector("#trappedKillers");
+
+    console.log(trappedKillersParagraph);
+  };
+
   const select = (e: any) => {
-    const parent = e.target.parentElement;
+    const parent = e.target.parentElement.parentElement.parentElement;
     const answerElement = parent.querySelector(".answer-field");
     const answer = answerElement.value;
     const selection = e.target.innerText.toLowerCase();
@@ -116,6 +146,14 @@ const subjects = [
     checkIfCorrect(answer, selection);
 
     currentSubject = rotateSubjects(currentSubject, nextSubject);
+
+    let results;
+
+    if (currentSubject === undefined) {
+      results = getResults();
+    }
+
+    displayResults(results);
   };
 
   buttons.forEach((btn) => {
@@ -124,12 +162,15 @@ const subjects = [
 
   displaySubject(currentSubject);
 
-  hideMessages();
+  //   hideMessages();
 </script>
 
 <style>
   .answer-message {
     display: none;
     color: white;
+  }
+  .buttons-group button {
+    margin-right: 2rem;
   }
 </style>

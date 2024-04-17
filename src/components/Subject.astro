@@ -4,13 +4,21 @@ const { subject } = Astro.props;
 const answer = subject.isKiller ? "killer" : "coder";
 ---
 
-<li class="subject">
-  <p>{subject.name}</p>
-  <img src={subject.photo} />
+<li class="subject w-60">
+  <div
+    class="bg-stone-700 border-2 border-stone-900 rounded-md overflow-hidden"
+  >
+    <img class="w-full" src={subject.photo} />
+    <input class="answer-field" type="hidden" value={answer} />
 
-  <input class="answer-field" type="hidden" value={answer} />
+    <div class="content p-4">
+      <p class="text-stone-50 mb-4 text-center text-2xl">{subject.name}</p>
 
-  <slot />
+      <div class="buttons-group flex flex-row justify-center">
+        <slot />
+      </div>
+    </div>
+  </div>
 </li>
 
 <style>
