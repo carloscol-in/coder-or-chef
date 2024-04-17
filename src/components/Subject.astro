@@ -1,0 +1,20 @@
+---
+const { subject } = Astro.props;
+
+const answer = subject.isKiller ? "killer" : "coder";
+---
+
+<li class="subject">
+  <p>{subject.name}</p>
+  <img src={subject.photo} />
+
+  <input class="answer-field" type="hidden" value={answer} />
+
+  <slot />
+</li>
+
+<style>
+  .subject {
+    display: none;
+  }
+</style>
