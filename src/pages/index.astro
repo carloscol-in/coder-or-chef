@@ -1,6 +1,7 @@
 ---
 import SubjectList from "../components/SubjectList.astro";
 import Subject from "../components/Subject.astro";
+import Results from "../components/Results.astro";
 import Default from "../layouts/Default.astro";
 
 const subjects = [
@@ -8,15 +9,15 @@ const subjects = [
     name: "John Doe",
     photo:
       "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
-    isCoder: true,
-    isKiller: false,
+    isCoder: false,
+    isKiller: true,
   },
   {
     name: "Jane Doe",
     photo:
       "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
-    isCoder: false,
-    isKiller: true,
+    isCoder: true,
+    isKiller: false,
   },
 ];
 ---
@@ -26,20 +27,34 @@ const subjects = [
     {
       subjects.map((subject) => (
         <Subject subject={subject}>
-          <button>Coder</button>
-          <button>Killer</button>
+          <button
+            class="p-1 px-3 border-2 border-green-300 rounded-md uppercase text-green-300"
+            data-answer="coder"
+          >
+            free
+          </button>
+          <button
+            class="p-1 px-3 border-2 border-red-300 rounded-md uppercase text-red-300"
+            data-answer="killer"
+          >
+            imprison
+          </button>
         </Subject>
       ))
     }
   </SubjectList>
 
-  <p class="answer-message correct-message">Answer was Correct!</p>
-  <p class="answer-message wrong-message">Answer was Wrong!</p>
+  <Results>
+    <span id="trappedKillers" slot="trappedKillers"></span>
+    <span id="trappedCoders" slot="trappedCoders"></span>
+    <span id="freeKillers" slot="freeKillers"></span>
+    <span id="freeCoders" slot="freeCoders"></span>
+  </Results>
 </Default>
 
 <script>
   const buttons = document.querySelectorAll("button");
-  const rightAnswers = [];
+  const answers: any[] = [];
   const subjectsQueue = Array.from(
     document.querySelectorAll("li.subject")
   ).reverse();
@@ -54,61 +69,70 @@ const subjects = [
     subject.style.display = "none";
   };
 
-  const hideMessages = () => {
-    const messages = Array.from(
-      document.getElementsByClassName(
-        "answer-message"
-      ) as HTMLCollectionOf<HTMLElement>
-    );
-
-    messages.forEach((message) => {
-      message.style.display = "none";
-    });
-  };
-
-  const displayWrongMessage = () => {
-    hideMessages();
-
-    const element = document.querySelector(".wrong-message") as HTMLElement;
-
-    element.style.display = "block";
-  };
-
-  const displayCorrectMessage = () => {
-    hideMessages();
-
-    const element = document.querySelector(".correct-message") as HTMLElement;
-
-    element.style.display = "block";
-  };
-
   const checkIfCorrect = (answer: String, selection: String) => {
-    const isCorrect = answer === selection;
-    rightAnswers.push(isCorrect);
-
-    if (isCorrect) displayCorrectMessage();
-    else displayWrongMessage();
+    console.log(answer, selection);
+    const correct = answer === selection;
+    answers.push({ isKiller: answer === "killer", guess: correct });
   };
 
   const rotateSubjects = (current: any, next: any) => {
     setTimeout(() => {
       hideSubject(current);
 
-      hideMessages();
-
       if (next === undefined) return;
 
       displaySubject(next);
-    }, 1000);
+    }, 100);
 
     return next;
   };
 
+  const getResults = () => {
+    let counters = {
+      trappedKillers: 0,
+      trappedCoders: 0,
+      freeKillers: 0,
+      freeCoders: 0,
+    };
+
+    answers.forEach((answer) => {
+      if (answer.isKiller && answer.guess) counters.trappedKillers += 1;
+      if (answer.isKiller && !answer.guess) counters.freeKillers += 1;
+      if (!answer.isKiller && !answer.guess) counters.trappedCoders += 1;
+      if (!answer.isKiller && answer.guess) counters.freeCoders += 1;
+    });
+
+    return counters;
+  };
+
+  const displayResults = (results: any) => {
+    console.log(results);
+    const container = document.querySelector("#results") as HTMLElement;
+    const trappedKillersParagraph = document.querySelector(
+      "#trappedKillers"
+    ) as HTMLElement;
+    const trappedCodersParagraph = document.querySelector(
+      "#trappedCoders"
+    ) as HTMLElement;
+    const freeKillersParagraph = document.querySelector(
+      "#freeKillers"
+    ) as HTMLElement;
+    const freeCodersParagraph = document.querySelector(
+      "#freeCoders"
+    ) as HTMLElement;
+
+    container.style.display = "block";
+    trappedKillersParagraph.innerText = results.trappedKillers;
+    trappedCodersParagraph.innerText = results.trappedCoders;
+    freeKillersParagraph.innerText = results.freeKillers;
+    freeCodersParagraph.innerText = results.freeCoders;
+  };
+
   const select = (e: any) => {
-    const parent = e.target.parentElement;
+    const parent = e.target.parentElement.parentElement.parentElement;
     const answerElement = parent.querySelector(".answer-field");
     const answer = answerElement.value;
-    const selection = e.target.innerText.toLowerCase();
+    const selection = e.target.attributes["data-answer"].value.toLowerCase();
     const nextSubject = subjectsQueue.pop();
 
     if (currentSubject === undefined) return;
@@ -116,6 +140,14 @@ const subjects = [
     checkIfCorrect(answer, selection);
 
     currentSubject = rotateSubjects(currentSubject, nextSubject);
+
+    let results;
+
+    if (currentSubject === undefined) {
+      results = getResults();
+
+      displayResults(results);
+    }
   };
 
   buttons.forEach((btn) => {
@@ -123,13 +155,14 @@ const subjects = [
   });
 
   displaySubject(currentSubject);
-
-  hideMessages();
 </script>
 
 <style>
   .answer-message {
     display: none;
     color: white;
+  }
+  .buttons-group button {
+    margin-right: 2rem;
   }
 </style>
