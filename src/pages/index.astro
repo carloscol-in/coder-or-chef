@@ -32,6 +32,9 @@ const subjects = [
       ))
     }
   </SubjectList>
+
+  <p class="answer-message correct-message">Answer was Correct!</p>
+  <p class="answer-message wrong-message">Answer was Wrong!</p>
 </Default>
 
 <script>
@@ -51,20 +54,59 @@ const subjects = [
     subject.style.display = "none";
   };
 
+  const hideMessages = () => {
+    const messages = Array.from(
+      document.getElementsByClassName(
+        "answer-message"
+      ) as HTMLCollectionOf<HTMLElement>
+    );
+
+    messages.forEach((message) => {
+      message.style.display = "none";
+    });
+  };
+
+  const displayWrongMessage = () => {
+    hideMessages();
+
+    const element = document.querySelector(".wrong-message") as HTMLElement;
+
+    element.style.display = "block";
+  };
+
+  const displayCorrectMessage = () => {
+    hideMessages();
+
+    const element = document.querySelector(".correct-message") as HTMLElement;
+
+    element.style.display = "block";
+  };
+
   const select = (e) => {
     const parent = e.target.parentElement;
     const answerElement = parent.querySelector(".answer-field");
     const answer = answerElement.value;
     const selection = e.target.innerText.toLowerCase();
 
+    if (currentSubject === undefined) return;
+
     const isCorrect = answer === selection;
     rightAnswers.push(isCorrect);
 
-    hideSubject(currentSubject);
+    if (isCorrect) displayCorrectMessage();
+    else displayWrongMessage();
 
-    currentSubject = subjectsQueue.pop();
+    setTimeout(() => {
+      hideSubject(currentSubject);
 
-    displaySubject(currentSubject);
+      hideMessages();
+
+      currentSubject = subjectsQueue.pop();
+
+      if (currentSubject === undefined) return;
+
+      displaySubject(currentSubject);
+    }, 1000);
   };
 
   buttons.forEach((btn) => {
@@ -72,4 +114,13 @@ const subjects = [
   });
 
   displaySubject(currentSubject);
+
+  hideMessages();
 </script>
+
+<style>
+  .answer-message {
+    display: block;
+    color: white;
+  }
+</style>
