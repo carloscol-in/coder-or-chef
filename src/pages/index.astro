@@ -1,4 +1,6 @@
 ---
+import SubjectList from "../components/SubjectList.astro";
+import Subject from "../components/Subject.astro";
 import Default from "../layouts/Default.astro";
 
 const subjects = [
@@ -17,22 +19,57 @@ const subjects = [
     isKiller: true,
   },
 ];
-
-const rightAnswers = [];
 ---
 
 <Default>
-  <ul>
+  <SubjectList>
     {
       subjects.map((subject) => (
-        <li>
-          <p>{subject.name}</p>
-          <img src={subject.photo} />
-
+        <Subject subject={subject}>
           <button>Coder</button>
           <button>Killer</button>
-        </li>
+        </Subject>
       ))
     }
-  </ul>
+  </SubjectList>
 </Default>
+
+<script>
+  const buttons = document.querySelectorAll("button");
+  const rightAnswers = [];
+  const subjectsQueue = Array.from(
+    document.querySelectorAll("li.subject")
+  ).reverse();
+
+  let currentSubject = subjectsQueue.pop();
+
+  const displaySubject = (subject) => {
+    subject.style.display = "block";
+  };
+
+  const hideSubject = (subject) => {
+    subject.style.display = "none";
+  };
+
+  const select = (e) => {
+    const parent = e.target.parentElement;
+    const answerElement = parent.querySelector(".answer-field");
+    const answer = answerElement.value;
+    const selection = e.target.innerText.toLowerCase();
+
+    const isCorrect = answer === selection;
+    rightAnswers.push(isCorrect);
+
+    hideSubject(currentSubject);
+
+    currentSubject = subjectsQueue.pop();
+
+    displaySubject(currentSubject);
+  };
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", select);
+  });
+
+  displaySubject(currentSubject);
+</script>
