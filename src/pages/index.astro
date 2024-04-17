@@ -9,15 +9,15 @@ const subjects = [
     name: "John Doe",
     photo:
       "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
-    isCoder: true,
-    isKiller: false,
+    isCoder: false,
+    isKiller: true,
   },
   {
     name: "Jane Doe",
     photo:
       "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
-    isCoder: false,
-    isKiller: true,
+    isCoder: true,
+    isKiller: false,
   },
 ];
 ---
@@ -27,11 +27,17 @@ const subjects = [
     {
       subjects.map((subject) => (
         <Subject subject={subject}>
-          <button class="p-1 px-3 border-2 border-green-300 rounded-md uppercase text-green-300">
-            coder
+          <button
+            class="p-1 px-3 border-2 border-green-300 rounded-md uppercase text-green-300"
+            data-answer="coder"
+          >
+            free
           </button>
-          <button class="p-1 px-3 border-2 border-red-300 rounded-md uppercase text-red-300">
-            killer
+          <button
+            class="p-1 px-3 border-2 border-red-300 rounded-md uppercase text-red-300"
+            data-answer="killer"
+          >
+            imprison
           </button>
         </Subject>
       ))
@@ -40,6 +46,9 @@ const subjects = [
 
   <Results>
     <p id="trappedKillers" slot="trappedKillers"></p>
+    <p id="trappedCoders" slot="trappedCoders"></p>
+    <p id="freeKillers" slot="freeKillers"></p>
+    <p id="freeCoders" slot="freeCoders"></p>
   </Results>
 </Default>
 
@@ -60,52 +69,20 @@ const subjects = [
     subject.style.display = "none";
   };
 
-  const hideMessages = () => {
-    const messages = Array.from(
-      document.getElementsByClassName(
-        "answer-message"
-      ) as HTMLCollectionOf<HTMLElement>
-    );
-
-    messages.forEach((message) => {
-      message.style.display = "none";
-    });
-  };
-
-  const displayWrongMessage = () => {
-    hideMessages();
-
-    const element = document.querySelector(".wrong-message") as HTMLElement;
-
-    element.style.display = "block";
-  };
-
-  const displayCorrectMessage = () => {
-    hideMessages();
-
-    const element = document.querySelector(".correct-message") as HTMLElement;
-
-    element.style.display = "block";
-  };
-
   const checkIfCorrect = (answer: String, selection: String) => {
+    console.log(answer, selection);
     const correct = answer === selection;
     answers.push({ isKiller: answer === "killer", guess: correct });
-
-    // if (correct) displayCorrectMessage();
-    // else displayWrongMessage();
   };
 
   const rotateSubjects = (current: any, next: any) => {
     setTimeout(() => {
       hideSubject(current);
 
-      //   hideMessages();
-
       if (next === undefined) return;
 
       displaySubject(next);
-    }, 1000);
+    }, 100);
 
     return next;
   };
@@ -121,24 +98,43 @@ const subjects = [
     answers.forEach((answer) => {
       if (answer.isKiller && answer.guess) counters.trappedKillers += 1;
       if (answer.isKiller && !answer.guess) counters.freeKillers += 1;
-      if (!answer.isKiller && answer.guess) counters.trappedCoders += 1;
-      if (!answer.isKiller && !answer.guess) counters.freeCoders += 1;
+      if (!answer.isKiller && !answer.guess) counters.trappedCoders += 1;
+      if (!answer.isKiller && answer.guess) counters.freeCoders += 1;
     });
 
     return counters;
   };
 
   const displayResults = (results) => {
-    const trappedKillersParagraph = document.querySelector("#trappedKillers");
+    console.log(results);
+    const container = document.querySelector("#results") as HTMLElement;
+    const trappedKillersParagraph = document.querySelector(
+      "#trappedKillers"
+    ) as HTMLElement;
+    const trappedCodersParagraph = document.querySelector(
+      "#trappedCoders"
+    ) as HTMLElement;
+    const freeKillersParagraph = document.querySelector(
+      "#freeKillers"
+    ) as HTMLElement;
+    const freeCodersParagraph = document.querySelector(
+      "#freeCoders"
+    ) as HTMLElement;
 
-    console.log(trappedKillersParagraph);
+    container.style.display = "block";
+    trappedKillersParagraph.innerText = results.trappedKillers;
+    trappedCodersParagraph.innerText = results.trappedCoders;
+    freeKillersParagraph.innerText = results.freeKillers;
+    freeCodersParagraph.innerText = results.freeCoders;
+
+    console.log(results);
   };
 
   const select = (e: any) => {
     const parent = e.target.parentElement.parentElement.parentElement;
     const answerElement = parent.querySelector(".answer-field");
     const answer = answerElement.value;
-    const selection = e.target.innerText.toLowerCase();
+    const selection = e.target.attributes["data-answer"].value.toLowerCase();
     const nextSubject = subjectsQueue.pop();
 
     if (currentSubject === undefined) return;
@@ -151,9 +147,9 @@ const subjects = [
 
     if (currentSubject === undefined) {
       results = getResults();
-    }
 
-    displayResults(results);
+      displayResults(results);
+    }
   };
 
   buttons.forEach((btn) => {
@@ -161,8 +157,6 @@ const subjects = [
   });
 
   displaySubject(currentSubject);
-
-  //   hideMessages();
 </script>
 
 <style>
