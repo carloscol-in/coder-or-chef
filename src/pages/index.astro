@@ -45,10 +45,10 @@ const subjects = [
   </SubjectList>
 
   <Results>
-    <p id="trappedKillers" slot="trappedKillers"></p>
-    <p id="trappedCoders" slot="trappedCoders"></p>
-    <p id="freeKillers" slot="freeKillers"></p>
-    <p id="freeCoders" slot="freeCoders"></p>
+    <span id="trappedKillers" slot="trappedKillers"></span>
+    <span id="trappedCoders" slot="trappedCoders"></span>
+    <span id="freeKillers" slot="freeKillers"></span>
+    <span id="freeCoders" slot="freeCoders"></span>
   </Results>
 </Default>
 
@@ -105,7 +105,7 @@ const subjects = [
     return counters;
   };
 
-  const displayResults = (results) => {
+  const displayResults = (results: any) => {
     console.log(results);
     const container = document.querySelector("#results") as HTMLElement;
     const trappedKillersParagraph = document.querySelector(
@@ -126,8 +126,6 @@ const subjects = [
     trappedCodersParagraph.innerText = results.trappedCoders;
     freeKillersParagraph.innerText = results.freeKillers;
     freeCodersParagraph.innerText = results.freeCoders;
-
-    console.log(results);
   };
 
   const select = (e: any) => {
