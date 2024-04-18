@@ -1,6 +1,6 @@
-h1, h2, h3, p {
-    color: white;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .buttons-group button {
     margin-right: 2rem;
