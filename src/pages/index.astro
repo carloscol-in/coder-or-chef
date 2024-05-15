@@ -12,13 +12,13 @@ const subjects = [
     isCoder: false,
     isKiller: true,
   },
-  {
-    name: "Jane Doe",
-    photo:
-      "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
-    isCoder: true,
-    isKiller: false,
-  },
+  // {
+  //   name: "Jane Doe",
+  //   photo:
+  //     "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
+  //   isCoder: true,
+  //   isKiller: false,
+  // },
 ];
 ---
 
@@ -106,7 +106,6 @@ const subjects = [
   };
 
   const displayResults = (results: any) => {
-    console.log(results);
     const container = document.querySelector("#results") as HTMLElement;
     const trappedKillersParagraph = document.querySelector(
       "#trappedKillers"
