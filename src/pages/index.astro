@@ -6,20 +6,110 @@ import Default from "../layouts/Default.astro";
 
 const subjects = [
   {
-    name: "John Doe",
+    name: "Gennady Korotkevich",
     photo:
-      "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
-    isCoder: false,
-    isKiller: true,
-  },
-  {
-    name: "Jane Doe",
-    photo:
-      "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
+      "https://images.ctfassets.net/b5f1djy59z3a/2HEGus6HKIluTpGxwOrDAB/f330c095dfd155f4bea6d8a73176abf7/tourist.jpg",
     isCoder: true,
     isKiller: false,
   },
-];
+  {
+    name: "James Gosling",
+    photo:
+      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivezRfAETV3COgWz09nwUYRqYhLska6TdgNVI2cWH4pgHBeQGWCmdXuJeYOG4FHax5qvbHQy3aQPAoIUDybJksaJeCNHGH0JVjk3-e4VzYlKp0MDhw1mov0yhhqO3AEp-HN4S6-ZFPVYU/s1600/05-19+Efemerides+de+Tecnologia+James-Gosling.jpg",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "Adele Goldberg",
+    photo: "https://stemlook.com.au/wp-content/uploads/2023/10/adel.jpg",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "John Carmack",
+    photo:
+      "https://pbs.twimg.com/profile_images/1560764938083352577/B1X3m4NN_400x400.jpg",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "Tim Berners Lee",
+    photo:
+      "https://cdn.britannica.com/94/123894-050-53EC378E/Tim-Berners-Lee-2005.jpg",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "Steve Capps",
+    photo:
+      "https://ww1.prweb.com/prfiles/2023/06/16/19399265/gI_151883_NewsImage_vcsPRAsset_3859126_151883_8020bc66-8edd-4efe-85aa-017812f08a06_0.png",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "Paul Graham",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/e/e3/Paulgraham_240x320.jpg",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "Yukihiro Matsumoto",
+    photo:
+      "https://i.pinimg.com/originals/26/55/e5/2655e59401961d64f2746ac3bc5463bf.jpg",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "Matt Mullenweg",
+    photo:
+      "https://media.licdn.com/dms/image/D4E12AQGcj_uYT6TOzQ/article-cover_image-shrink_720_1280/0/1660678392960?e=2147483647&v=beta&t=e_ttQeAkfomR8P-EL3FBVOLzll_jY2Bxom9uI9vU70k",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "Phiwa Nkambule",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Phiwa_Nkambule_2021_%28Long%29.jpg/220px-Phiwa_Nkambule_2021_%28Long%29.jpg",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "Tom Preston-Werner",
+    photo:
+      "https://imageio.forbes.com/specials-images/imageserve/5c74515731358e35dd273053/0x0.jpg?format=jpg&crop=512,512,x0,y0,safe&height=416&width=416&fit=bounds",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "Roberta Williams",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/b/b3/Roberta_Williams_headshot.jpg",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "Sophie Wilson",
+    photo:
+      "https://computerhistory.org/wp-content/uploads/2020/01/2012_sophie_wilson-e1580233484678.jpg",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "Hedy Lamarr",
+    photo:
+      "https://mujeresconciencia.com/app/uploads/2021/04/Hedy_Lamarr_Publicity_Photo_for_The_Heavenly_Body_1944.jpg",
+    isCoder: true,
+    isKiller: false,
+  },
+  {
+    name: "Guido Van Rossum",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/e/e2/Guido-portrait-2014-drc.jpg",
+    isCoder: true,
+    isKiller: false,
+  },
+].reverse();
 ---
 
 <Default>
@@ -106,7 +196,6 @@ const subjects = [
   };
 
   const displayResults = (results: any) => {
-    console.log(results);
     const container = document.querySelector("#results") as HTMLElement;
     const trappedKillersParagraph = document.querySelector(
       "#trappedKillers"

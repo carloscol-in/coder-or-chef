@@ -6,9 +6,9 @@ const answer = subject.isKiller ? "killer" : "coder";
 
 <li class="subject w-60">
   <div
-    class="bg-stone-700 border-2 border-stone-900 rounded-md overflow-hidden"
+    class="bg-zinc-800 border-[1px] border-zinc-500 rounded-md overflow-hidden"
   >
-    <img class="w-full" src={subject.photo} />
+    <img class="w-full h-52 object-cover" src={subject.photo} />
     <input class="answer-field" type="hidden" value={answer} />
 
     <div class="content p-4">
