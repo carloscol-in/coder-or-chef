@@ -8,17 +8,21 @@ import "../styles/global.css";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Killer or Coder?</title>
+    <title>Coder or Chef?</title>
   </head>
-  <body class="bg-zinc-950 h-screen flex flex-col justify-center">
-    <header class="container mx-auto mb-20">
-      <h1 class="text-4xl text-center text-zinc-200 uppercase">
-        Killer/Coder?
-      </h1>
+  <body class="bg-zinc-900 h-screen flex flex-col justify-between">
+    <header class="container mx-auto mt-10">
+      <h1 class="text-4xl text-center text-zinc-200 uppercase">Coder/Chef?</h1>
     </header>
 
     <main class="container mx-auto">
       <slot />
     </main>
+
+    <footer class="container mx-auto mb-10">
+      <div class="w-fit mx-auto text-zinc-100 text-lg border-2 border-cyan-400 rounded-md px-3 py-2">
+        <p>Join our <a href="https://wearecommunity.io/communities/pymx" target="_blank" class="text-cyan-300">Community</a>!</p>
+      </div>
+    </footer>
   </body>
 </html>

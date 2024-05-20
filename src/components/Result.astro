@@ -1,0 +1,25 @@
+---
+
+const { color } = Astro.props;
+
+---
+
+<div class={`result ${color} mx-auto w-fit py-2 px-4 rounded-md uppercase mt-4`}>
+  <slot />
+</div>
+
+<style>
+    .result {
+        border: 2px solid;
+    }
+    .red {
+        background-color: #882222;
+        border-color: #FF4625;
+        color: #FFBBAF;
+    }
+    .green {
+        background-color: #156823;
+        border-color: #2BFF4E;
+        color: #B9FFC5;
+    }
+</style>

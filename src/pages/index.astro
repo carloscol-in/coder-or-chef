@@ -2,6 +2,7 @@
 import SubjectList from "../components/SubjectList.astro";
 import Subject from "../components/Subject.astro";
 import Results from "../components/Results.astro";
+import Result from "../components/Result.astro";
 import Default from "../layouts/Default.astro";
 
 const subjects = [
@@ -10,214 +11,234 @@ const subjects = [
     photo:
       "https://images.ctfassets.net/b5f1djy59z3a/2HEGus6HKIluTpGxwOrDAB/f330c095dfd155f4bea6d8a73176abf7/tourist.jpg",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "James Gosling",
     photo:
       "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivezRfAETV3COgWz09nwUYRqYhLska6TdgNVI2cWH4pgHBeQGWCmdXuJeYOG4FHax5qvbHQy3aQPAoIUDybJksaJeCNHGH0JVjk3-e4VzYlKp0MDhw1mov0yhhqO3AEp-HN4S6-ZFPVYU/s1600/05-19+Efemerides+de+Tecnologia+James-Gosling.jpg",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "Adele Goldberg",
     photo: "https://stemlook.com.au/wp-content/uploads/2023/10/adel.jpg",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "John Carmack",
     photo:
       "https://pbs.twimg.com/profile_images/1560764938083352577/B1X3m4NN_400x400.jpg",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "Tim Berners Lee",
     photo:
       "https://cdn.britannica.com/94/123894-050-53EC378E/Tim-Berners-Lee-2005.jpg",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "Steve Capps",
     photo:
       "https://ww1.prweb.com/prfiles/2023/06/16/19399265/gI_151883_NewsImage_vcsPRAsset_3859126_151883_8020bc66-8edd-4efe-85aa-017812f08a06_0.png",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "Paul Graham",
     photo:
       "https://upload.wikimedia.org/wikipedia/commons/e/e3/Paulgraham_240x320.jpg",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "Yukihiro Matsumoto",
     photo:
       "https://i.pinimg.com/originals/26/55/e5/2655e59401961d64f2746ac3bc5463bf.jpg",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "Matt Mullenweg",
     photo:
       "https://media.licdn.com/dms/image/D4E12AQGcj_uYT6TOzQ/article-cover_image-shrink_720_1280/0/1660678392960?e=2147483647&v=beta&t=e_ttQeAkfomR8P-EL3FBVOLzll_jY2Bxom9uI9vU70k",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "Phiwa Nkambule",
     photo:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Phiwa_Nkambule_2021_%28Long%29.jpg/220px-Phiwa_Nkambule_2021_%28Long%29.jpg",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "Tom Preston-Werner",
     photo:
       "https://imageio.forbes.com/specials-images/imageserve/5c74515731358e35dd273053/0x0.jpg?format=jpg&crop=512,512,x0,y0,safe&height=416&width=416&fit=bounds",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "Roberta Williams",
     photo:
       "https://upload.wikimedia.org/wikipedia/commons/b/b3/Roberta_Williams_headshot.jpg",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "Sophie Wilson",
     photo:
       "https://computerhistory.org/wp-content/uploads/2020/01/2012_sophie_wilson-e1580233484678.jpg",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "Hedy Lamarr",
     photo:
       "https://mujeresconciencia.com/app/uploads/2021/04/Hedy_Lamarr_Publicity_Photo_for_The_Heavenly_Body_1944.jpg",
     isCoder: true,
-    isKiller: false,
+    isChef: false,
   },
   {
     name: "Guido Van Rossum",
     photo:
       "https://upload.wikimedia.org/wikipedia/commons/e/e2/Guido-portrait-2014-drc.jpg",
     isCoder: true,
-    isKiller: false,
-  },
-  {
-    name: "Gordon Ramsay",
-    photo: "https://pbs.twimg.com/profile_images/1448696882746695683/Jp2_LEBL_400x400.jpg",
-    isCoder: false,
-    isKiller: true,
-  },
-  {
-    name: "Julia Child",
-    photo: "https://s.yimg.com/ny/api/res/1.2/PwGExNIYVzadUgmZWbJBgQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQyNw--/https://media.zenfs.com/en/eating_well_articles_946/22812b74ee0c25ba7679785121ce8ec7",
-    isCoder: false,
-    isKiller: true,
-  },
-  {
-    name: "Jamie Oliver",
-    photo: "https://cdn.britannica.com/20/200220-050-394A5A7C/Jamie-Oliver-2016.jpg",
-    isCoder: false,
-    isKiller: true,
-  },
-  {
-    name: "Anthony Bourdain",
-    photo: "https://i.dailymail.co.uk/i/newpix/2018/06/09/12/4D0EADA700000578-5824249-Last_days_This_photo_shows_Bourdain_shooting_a_new_Parts_Unknown-m-22_1528543942128.jpg",
-    isCoder: false,
-    isKiller: true,
-  },
-  {
-    name: "Wolfgang Puck",
-    photo: "https://www.mashed.com/img/gallery/the-untold-truth-of-wolfgang-puck/intro-1624472987.jpg",
-    isCoder: false,
-    isKiller: true,
-  },
-  {
-    name: "Emeril Lagasse",
-    photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_qbNd_uEqn0xp3SXHRyZEOVqT1aogjXRw-92HJ20FtkvzeZtkQ2FYuzkG1vljkYOIgQA&usqp=CAU",
-    isCoder: false,
-    isKiller: true,
-  },
-  {
-    name: "Rachel Ray",
-    photo: "https://www.hollywoodreporter.com/wp-content/uploads/2024/01/AE.Rachael-Ray-H-2024.jpg?w=1024",
-    isCoder: false,
-    isKiller: true,
-  },
-  {
-    name: "Heston Blumenthal",
-    photo: "https://www.miele.com/media/microsites/ubc/images/posts/HestonBlumenthal_Aufmacher_828x1344.jpg",
-    isCoder: false,
-    isKiller: true,
-  },
-  {
-    name: "Marco Pierre White",
-    photo: "https://c8.alamy.com/compes/rx152a/marco-pierre-white-chef-en-el-restaurante-wandsworth-common-frente-a-harveys-donde-hizo-su-nombre-y-gano-dos-estrellas-michelins-londres-inglaterra-reino-unido-1987-rx152a.jpg",
-    isCoder: false,
-    isKiller: true,
-  },
-  {
-    name: "Thomas Keller",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/9/93/Thomas_Keller.jpg",
-    isCoder: false,
-    isKiller: true
+    isChef: false,
   },
   {
     name: "Alan Turing",
-    photo: "https://bajanews.mx/uploads/images/posts/88772574364790f666bed2.jpg",
+    photo:
+      "https://bajanews.mx/uploads/images/posts/88772574364790f666bed2.jpg",
     isCoder: true,
-    isKiller: false
+    isChef: false,
   },
   {
     name: "Grace Hopper",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Commodore_Grace_M._Hopper%2C_USN_%28covered%29.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/a/ad/Commodore_Grace_M._Hopper%2C_USN_%28covered%29.jpg",
     isCoder: true,
-    isKiller: false
+    isChef: false,
   },
   {
     name: "Donald Knuth",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/4/4f/KnuthAtOpenContentAlliance.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/4/4f/KnuthAtOpenContentAlliance.jpg",
     isCoder: true,
-    isKiller: false
+    isChef: false,
   },
   {
     name: "Edsger Dijkstra",
-    photo: "https://mediaproxy.salon.com/width/1200/https://media2.salon.com/2003/07/goto_considered_joyful.jpg",
+    photo:
+      "https://mediaproxy.salon.com/width/1200/https://media2.salon.com/2003/07/goto_considered_joyful.jpg",
     isCoder: true,
-    isKiller: false
+    isChef: false,
   },
   {
     name: "Richard Stallman",
-    photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyz_Lr-KWk52Ek5w7vctVsfpXd71-LdYJwiCNO89tbRw&s",
+    photo:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyz_Lr-KWk52Ek5w7vctVsfpXd71-LdYJwiCNO89tbRw&s",
     isCoder: true,
-    isKiller: false
+    isChef: false,
   },
   {
     name: "Linus Torvalds",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/0/01/LinuxCon_Europe_Linus_Torvalds_03_%28cropped%29.jpg",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/0/01/LinuxCon_Europe_Linus_Torvalds_03_%28cropped%29.jpg",
     isCoder: true,
-    isKiller: false
+    isChef: false,
   },
   {
     name: "Claude Shannon",
-    photo: "https://www.bbvaopenmind.com/wp-content/uploads/2021/04/BBVA-OpenMind-Gonzalo-Suard%C3%ADaz-Claude-Shannon-inventor-de-la-era-digital-2.jpg",
+    photo:
+      "https://www.bbvaopenmind.com/wp-content/uploads/2021/04/BBVA-OpenMind-Gonzalo-Suard%C3%ADaz-Claude-Shannon-inventor-de-la-era-digital-2.jpg",
     isCoder: true,
-    isKiller: false
+    isChef: false,
   },
   {
     name: "John von Neumann",
-    photo: "https://upload.wikimedia.org/wikipedia/commons/5/5e/JohnvonNeumann-LosAlamos.gif",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/5/5e/JohnvonNeumann-LosAlamos.gif",
     isCoder: true,
-    isKiller: false
-  }
-].reverse();
+    isChef: false,
+  },
+  {
+    name: "Gordon Ramsay",
+    photo:
+      "https://pbs.twimg.com/profile_images/1448696882746695683/Jp2_LEBL_400x400.jpg",
+    isCoder: false,
+    isChef: true,
+  },
+  {
+    name: "Julia Child",
+    photo:
+      "https://s.yimg.com/ny/api/res/1.2/PwGExNIYVzadUgmZWbJBgQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQyNw--/https://media.zenfs.com/en/eating_well_articles_946/22812b74ee0c25ba7679785121ce8ec7",
+    isCoder: false,
+    isChef: true,
+  },
+  {
+    name: "Jamie Oliver",
+    photo:
+      "https://cdn.britannica.com/20/200220-050-394A5A7C/Jamie-Oliver-2016.jpg",
+    isCoder: false,
+    isChef: true,
+  },
+  {
+    name: "Anthony Bourdain",
+    photo:
+      "https://i.dailymail.co.uk/i/newpix/2018/06/09/12/4D0EADA700000578-5824249-Last_days_This_photo_shows_Bourdain_shooting_a_new_Parts_Unknown-m-22_1528543942128.jpg",
+    isCoder: false,
+    isChef: true,
+  },
+  {
+    name: "Wolfgang Puck",
+    photo:
+      "https://www.mashed.com/img/gallery/the-untold-truth-of-wolfgang-puck/intro-1624472987.jpg",
+    isCoder: false,
+    isChef: true,
+  },
+  {
+    name: "Emeril Lagasse",
+    photo:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_qbNd_uEqn0xp3SXHRyZEOVqT1aogjXRw-92HJ20FtkvzeZtkQ2FYuzkG1vljkYOIgQA&usqp=CAU",
+    isCoder: false,
+    isChef: true,
+  },
+  {
+    name: "Rachel Ray",
+    photo:
+      "https://www.hollywoodreporter.com/wp-content/uploads/2024/01/AE.Rachael-Ray-H-2024.jpg?w=1024",
+    isCoder: false,
+    isChef: true,
+  },
+  {
+    name: "Heston Blumenthal",
+    photo:
+      "https://www.miele.com/media/microsites/ubc/images/posts/HestonBlumenthal_Aufmacher_828x1344.jpg",
+    isCoder: false,
+    isChef: true,
+  },
+  {
+    name: "Marco Pierre White",
+    photo:
+      "https://c8.alamy.com/compes/rx152a/marco-pierre-white-chef-en-el-restaurante-wandsworth-common-frente-a-harveys-donde-hizo-su-nombre-y-gano-dos-estrellas-michelins-londres-inglaterra-reino-unido-1987-rx152a.jpg",
+    isCoder: false,
+    isChef: true,
+  },
+  {
+    name: "Thomas Keller",
+    photo:
+      "https://upload.wikimedia.org/wikipedia/commons/9/93/Thomas_Keller.jpg",
+    isCoder: false,
+    isChef: true,
+  },
+].map(value => ({ value, sort: Math.random() }))
+  .sort((a, b) => a.sort - b.sort)
+  .map(({ value }) => value);
 ---
 
 <Default>
@@ -226,13 +247,13 @@ const subjects = [
       subjects.map((subject) => (
         <Subject subject={subject}>
           <button
-            class="p-1 px-3 border-2 border-red-300 rounded-md uppercase text-red-300"
-            data-answer="killer"
+            class="p-1 px-3 border-2 border-blue-200 rounded-md uppercase text-blue-200 hover:text-blue-400 hover:border-blue-300"
+            data-answer="chef"
           >
-            killer
+            chef
           </button>
           <button
-            class="p-1 px-3 border-2 border-green-300 rounded-md uppercase text-green-300"
+            class="p-1 px-3 border-2 border-lime-200 rounded-md uppercase text-lime-200 hover:text-lime-400 hover:border-lime-300"
             data-answer="coder"
           >
             coder
@@ -242,11 +263,18 @@ const subjects = [
     }
   </SubjectList>
 
+  <div id="result-correct" class="hidden">
+    <Result color="green">Correct</Result>
+  </div>
+  <div id="result-incorrect" class="hidden">
+    <Result color="red">Incorrect</Result>
+  </div>
+
   <Results>
-    <span id="trappedKillers" slot="trappedKillers"></span>
-    <span id="trappedCoders" slot="trappedCoders"></span>
-    <span id="freeKillers" slot="freeKillers"></span>
-    <span id="freeCoders" slot="freeCoders"></span>
+    <span id="identifiedCoders" slot="identifiedCoders"></span>
+    <span id="missedCoders" slot="missedCoders"></span>
+    <span id="missedChefs" slot="missedChefs"></span>
+    <span id="identifiedChefs" slot="identifiedChefs"></span>
   </Results>
 </Default>
 
@@ -268,9 +296,9 @@ const subjects = [
   };
 
   const checkIfCorrect = (answer: String, selection: String) => {
-    console.log(answer, selection);
     const correct = answer === selection;
-    answers.push({ isKiller: answer === "killer", guess: correct });
+    answers.push({ isCoder: answer === "coder", guess: correct });
+    return correct;
   };
 
   const rotateSubjects = (current: any, next: any) => {
@@ -287,17 +315,17 @@ const subjects = [
 
   const getResults = () => {
     let counters = {
-      trappedKillers: 0,
-      trappedCoders: 0,
-      freeKillers: 0,
-      freeCoders: 0,
+      identifiedCoders: 0,
+      missedCoders: 0,
+      missedChefs: 0,
+      identifiedChefs: 0,
     };
 
     answers.forEach((answer) => {
-      if (answer.isKiller && answer.guess) counters.trappedKillers += 1;
-      if (answer.isKiller && !answer.guess) counters.freeKillers += 1;
-      if (!answer.isKiller && !answer.guess) counters.trappedCoders += 1;
-      if (!answer.isKiller && answer.guess) counters.freeCoders += 1;
+      if (answer.isCoder && answer.guess) counters.identifiedCoders += 1;
+      if (answer.isCoder && !answer.guess) counters.missedChefs += 1;
+      if (!answer.isCoder && !answer.guess) counters.missedCoders += 1;
+      if (!answer.isCoder && answer.guess) counters.identifiedChefs += 1;
     });
 
     return counters;
@@ -305,25 +333,32 @@ const subjects = [
 
   const displayResults = (results: any) => {
     const container = document.querySelector("#results") as HTMLElement;
-    const trappedKillersParagraph = document.querySelector(
-      "#trappedKillers"
+    const identifiedCodersParagraph = document.querySelector(
+      "#identifiedCoders"
     ) as HTMLElement;
-    const trappedCodersParagraph = document.querySelector(
-      "#trappedCoders"
+    const missedCodersParagraph = document.querySelector(
+      "#missedCoders"
     ) as HTMLElement;
-    const freeKillersParagraph = document.querySelector(
-      "#freeKillers"
+    const missedChefsParagraph = document.querySelector(
+      "#missedChefs"
     ) as HTMLElement;
-    const freeCodersParagraph = document.querySelector(
-      "#freeCoders"
+    const identifiedChefsParagraph = document.querySelector(
+      "#identifiedChefs"
     ) as HTMLElement;
 
     container.style.display = "block";
-    trappedKillersParagraph.innerText = results.trappedKillers;
-    trappedCodersParagraph.innerText = results.trappedCoders;
-    freeKillersParagraph.innerText = results.freeKillers;
-    freeCodersParagraph.innerText = results.freeCoders;
+    identifiedCodersParagraph.innerText = results.identifiedCoders;
+    missedCodersParagraph.innerText = results.missedCoders;
+    missedChefsParagraph.innerText = results.missedChefs;
+    identifiedChefsParagraph.innerText = results.identifiedChefs;
   };
+
+  const hideResult = () => {
+    const resultCorrect = document.getElementById("result-correct");
+    const resultIncorrect = document.getElementById("result-incorrect");
+    resultCorrect.classList.add("hidden");
+    resultIncorrect.classList.add("hidden");
+  }
 
   const select = (e: any) => {
     const parent = e.target.parentElement.parentElement.parentElement;
@@ -331,20 +366,29 @@ const subjects = [
     const answer = answerElement.value;
     const selection = e.target.attributes["data-answer"].value.toLowerCase();
     const nextSubject = subjectsQueue.pop();
+    const resultCorrect = document.getElementById("result-correct");
+    const resultIncorrect = document.getElementById("result-incorrect");
 
     if (currentSubject === undefined) return;
 
-    checkIfCorrect(answer, selection);
+    const isCorrect = checkIfCorrect(answer, selection);
+    
+    if (isCorrect) resultCorrect.classList.remove("hidden")
+    else resultIncorrect.classList.remove("hidden")
 
-    currentSubject = rotateSubjects(currentSubject, nextSubject);
+    setTimeout(() => {
+      currentSubject = rotateSubjects(currentSubject, nextSubject);
 
-    let results;
+      let results;
 
-    if (currentSubject === undefined) {
-      results = getResults();
+      if (currentSubject === undefined) {
+        results = getResults();
 
-      displayResults(results);
-    }
+        displayResults(results);
+      }
+
+      hideResult();
+    }, 2000);
   };
 
   buttons.forEach((btn) => {
