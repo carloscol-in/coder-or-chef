@@ -356,8 +356,8 @@ const subjects = [
   const hideResult = () => {
     const resultCorrect = document.getElementById("result-correct");
     const resultIncorrect = document.getElementById("result-incorrect");
-    resultCorrect.classList.add("hidden");
-    resultIncorrect.classList.add("hidden");
+    resultCorrect?.classList.add("hidden");
+    resultIncorrect?.classList.add("hidden");
   }
 
   const select = (e: any) => {
@@ -373,8 +373,8 @@ const subjects = [
 
     const isCorrect = checkIfCorrect(answer, selection);
     
-    if (isCorrect) resultCorrect.classList.remove("hidden")
-    else resultIncorrect.classList.remove("hidden")
+    if (isCorrect) resultCorrect?.classList.remove("hidden")
+    else resultIncorrect?.classList.remove("hidden")
 
     setTimeout(() => {
       currentSubject = rotateSubjects(currentSubject, nextSubject);
