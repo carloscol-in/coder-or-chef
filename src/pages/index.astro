@@ -7,20 +7,6 @@ import Default from "../layouts/Default.astro";
 
 const subjects = [
   {
-    name: "Gennady Korotkevich",
-    photo:
-      "https://images.ctfassets.net/b5f1djy59z3a/2HEGus6HKIluTpGxwOrDAB/f330c095dfd155f4bea6d8a73176abf7/tourist.jpg",
-    isCoder: true,
-    isChef: false,
-  },
-  {
-    name: "James Gosling",
-    photo:
-      "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivezRfAETV3COgWz09nwUYRqYhLska6TdgNVI2cWH4pgHBeQGWCmdXuJeYOG4FHax5qvbHQy3aQPAoIUDybJksaJeCNHGH0JVjk3-e4VzYlKp0MDhw1mov0yhhqO3AEp-HN4S6-ZFPVYU/s1600/05-19+Efemerides+de+Tecnologia+James-Gosling.jpg",
-    isCoder: true,
-    isChef: false,
-  },
-  {
     name: "Adele Goldberg",
     photo: "https://stemlook.com.au/wp-content/uploads/2023/10/adel.jpg",
     isCoder: true,
@@ -139,13 +125,6 @@ const subjects = [
     isChef: false,
   },
   {
-    name: "Richard Stallman",
-    photo:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyz_Lr-KWk52Ek5w7vctVsfpXd71-LdYJwiCNO89tbRw&s",
-    isCoder: true,
-    isChef: false,
-  },
-  {
     name: "Linus Torvalds",
     photo:
       "https://upload.wikimedia.org/wikipedia/commons/0/01/LinuxCon_Europe_Linus_Torvalds_03_%28cropped%29.jpg",
@@ -156,13 +135,6 @@ const subjects = [
     name: "Claude Shannon",
     photo:
       "https://www.bbvaopenmind.com/wp-content/uploads/2021/04/BBVA-OpenMind-Gonzalo-Suard%C3%ADaz-Claude-Shannon-inventor-de-la-era-digital-2.jpg",
-    isCoder: true,
-    isChef: false,
-  },
-  {
-    name: "John von Neumann",
-    photo:
-      "https://upload.wikimedia.org/wikipedia/commons/5/5e/JohnvonNeumann-LosAlamos.gif",
     isCoder: true,
     isChef: false,
   },
@@ -216,13 +188,6 @@ const subjects = [
     isChef: true,
   },
   {
-    name: "Heston Blumenthal",
-    photo:
-      "https://www.miele.com/media/microsites/ubc/images/posts/HestonBlumenthal_Aufmacher_828x1344.jpg",
-    isCoder: false,
-    isChef: true,
-  },
-  {
     name: "Marco Pierre White",
     photo:
       "https://c8.alamy.com/compes/rx152a/marco-pierre-white-chef-en-el-restaurante-wandsworth-common-frente-a-harveys-donde-hizo-su-nombre-y-gano-dos-estrellas-michelins-londres-inglaterra-reino-unido-1987-rx152a.jpg",
@@ -236,7 +201,7 @@ const subjects = [
     isCoder: false,
     isChef: true,
   },
-]
+];
 ---
 
 <Default>
@@ -245,13 +210,13 @@ const subjects = [
       subjects.map((subject) => (
         <Subject subject={subject}>
           <button
-            class="p-1 px-3 border-2 border-blue-200 rounded-md uppercase text-blue-200 hover:text-blue-400 hover:border-blue-300"
+            class="p-1 px-3 border-2 border-b-4 border-orange-300 rounded-md uppercase text-orange-300 hover:text-orange-400 hover:border-orange-400 hover:border-b-2"
             data-answer="chef"
           >
             chef
           </button>
           <button
-            class="p-1 px-3 border-2 border-lime-200 rounded-md uppercase text-lime-200 hover:text-lime-400 hover:border-lime-300"
+            class="p-1 px-3 border-2 border-b-4 border-cyan-300 rounded-md uppercase text-cyan-300 hover:text-cyan-400 hover:border-cyan-400 hover:bg-zinc-900 hover:border-b-2"
             data-answer="coder"
           >
             coder
@@ -279,11 +244,11 @@ const subjects = [
 <script>
   const buttons = document.querySelectorAll("button");
   const answers: any[] = [];
-  const subjectsQueue = Array.from(
-    document.querySelectorAll("li.subject")
-  ).map(value => ({ value, sort: Math.random() }))
-  .sort((a, b) => a.sort - b.sort)
-  .map(({ value }) => value);;
+  const subjectsQueue = Array.from(document.querySelectorAll("li.subject"))
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value)
+    .slice(0, 10);
 
   let currentSubject = subjectsQueue.pop();
 
@@ -323,8 +288,8 @@ const subjects = [
 
     answers.forEach((answer) => {
       if (answer.isCoder && answer.guess) counters.identifiedCoders += 1;
-      if (answer.isCoder && !answer.guess) counters.missedChefs += 1;
-      if (!answer.isCoder && !answer.guess) counters.missedCoders += 1;
+      if (answer.isCoder && !answer.guess) counters.missedCoders += 1;
+      if (!answer.isCoder && !answer.guess) counters.missedChefs += 1;
       if (!answer.isCoder && answer.guess) counters.identifiedChefs += 1;
     });
 
@@ -358,7 +323,7 @@ const subjects = [
     const resultIncorrect = document.getElementById("result-incorrect");
     resultCorrect?.classList.add("hidden");
     resultIncorrect?.classList.add("hidden");
-  }
+  };
 
   const select = (e: any) => {
     const parent = e.target.parentElement.parentElement.parentElement;
@@ -372,9 +337,9 @@ const subjects = [
     if (currentSubject === undefined) return;
 
     const isCorrect = checkIfCorrect(answer, selection);
-    
-    if (isCorrect) resultCorrect?.classList.remove("hidden")
-    else resultIncorrect?.classList.remove("hidden")
+
+    if (isCorrect) resultCorrect?.classList.remove("hidden");
+    else resultIncorrect?.classList.remove("hidden");
 
     setTimeout(() => {
       currentSubject = rotateSubjects(currentSubject, nextSubject);
